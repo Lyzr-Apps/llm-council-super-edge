@@ -746,39 +746,54 @@ export default function Home() {
   const handleConvene = async (problem: string) => {
     setError(null)
     try {
+      console.log('Calling Council Orchestrator with problem:', problem)
       const result = await callAIAgent(problem, COUNCIL_ORCHESTRATOR_ID)
+      console.log('Council Orchestrator result:', result)
 
       if (result.success && result.response.status === 'success') {
         setOrchestratorResponse(result.response)
         setCurrentScreen('deliberation')
       } else {
-        setError(result.error || 'Failed to convene council')
+        setError(result.error || result.response?.message || 'Failed to convene council')
+        console.error('Council convening failed:', result)
       }
     } catch (err) {
       setError('Network error occurred')
-      console.error(err)
+      console.error('Exception during council convene:', err)
     }
   }
 
   const handleSynthesize = async () => {
-    if (!orchestratorResponse) return
+    if (!orchestratorResponse) {
+      console.error('handleSynthesize called but orchestratorResponse is null')
+      setError('No deliberation data available')
+      return
+    }
 
     setError(null)
     try {
+      console.log('Starting synthesis with orchestratorResponse:', orchestratorResponse)
       const result = orchestratorResponse.result as OrchestratorResult
+      console.log('Extracted result:', result)
+
       const synthesisMessage = `Synthesize consensus from this council deliberation: Problem: '${result.problem_statement}' ${JSON.stringify(result.council_deliberation)}`
+      console.log('Synthesis message prepared, calling Consensus Synthesizer...')
 
       const consensusResult = await callAIAgent(synthesisMessage, CONSENSUS_SYNTHESIZER_ID)
+      console.log('Consensus Synthesizer result:', consensusResult)
 
       if (consensusResult.success && consensusResult.response.status === 'success') {
         setConsensusResponse(consensusResult.response)
         setCurrentScreen('consensus')
+        console.log('Synthesis successful, moved to consensus screen')
       } else {
-        setError(consensusResult.error || 'Failed to synthesize consensus')
+        const errorMsg = consensusResult.error || consensusResult.response?.message || 'Failed to synthesize consensus'
+        setError(errorMsg)
+        console.error('Synthesis failed:', consensusResult)
       }
     } catch (err) {
-      setError('Network error occurred')
-      console.error(err)
+      setError('Network error occurred during synthesis')
+      console.error('Exception during synthesis:', err)
     }
   }
 
