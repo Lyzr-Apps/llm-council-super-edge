@@ -169,36 +169,40 @@ function CouncilMemberCard({
         <ConfidenceMeter confidence={analysis.confidence} color={colors.text} />
 
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="reasoning" className="border-gray-700">
-            <AccordionTrigger className="text-sm text-gray-300 hover:text-white">
-              Reasoning Chain
-            </AccordionTrigger>
-            <AccordionContent>
-              <ol className="space-y-2 text-sm text-gray-400">
-                {analysis.reasoning_chain.map((step, idx) => (
-                  <li key={idx} className="pl-4">
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            </AccordionContent>
-          </AccordionItem>
+          {analysis.reasoning_chain && analysis.reasoning_chain.length > 0 && (
+            <AccordionItem value="reasoning" className="border-gray-700">
+              <AccordionTrigger className="text-sm text-gray-300 hover:text-white">
+                Reasoning Chain
+              </AccordionTrigger>
+              <AccordionContent>
+                <ol className="space-y-2 text-sm text-gray-400">
+                  {analysis.reasoning_chain.map((step, idx) => (
+                    <li key={idx} className="pl-4">
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
-          <AccordionItem value="arguments" className="border-gray-700">
-            <AccordionTrigger className="text-sm text-gray-300 hover:text-white">
-              Key Arguments
-            </AccordionTrigger>
-            <AccordionContent>
-              <ul className="space-y-2 text-sm text-gray-400">
-                {analysis.key_arguments.map((arg, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                    <span>{arg}</span>
-                  </li>
-                ))}
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
+          {analysis.key_arguments && analysis.key_arguments.length > 0 && (
+            <AccordionItem value="arguments" className="border-gray-700">
+              <AccordionTrigger className="text-sm text-gray-300 hover:text-white">
+                Key Arguments
+              </AccordionTrigger>
+              <AccordionContent>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  {analysis.key_arguments.map((arg, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                      <span>{arg}</span>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          )}
 
           {analysis.model_perspective && (
             <AccordionItem value="perspective" className="border-gray-700">
@@ -307,12 +311,18 @@ function CouncilDeliberationScreen({
 
   const result = orchestratorResponse.result as OrchestratorResult
   const deliberation = result.council_deliberation
-  const voteSummary = result.vote_summary
+
+  // Safely access vote_summary with defaults
+  const voteSummary = result.vote_summary || {
+    support: 0,
+    oppose: 0,
+    abstain: 0
+  }
 
   const totalVotes = voteSummary.support + voteSummary.oppose + voteSummary.abstain
-  const supportPct = Math.round((voteSummary.support / totalVotes) * 100)
-  const opposePct = Math.round((voteSummary.oppose / totalVotes) * 100)
-  const abstainPct = Math.round((voteSummary.abstain / totalVotes) * 100)
+  const supportPct = totalVotes > 0 ? Math.round((voteSummary.support / totalVotes) * 100) : 0
+  const opposePct = totalVotes > 0 ? Math.round((voteSummary.oppose / totalVotes) * 100) : 0
+  const abstainPct = totalVotes > 0 ? Math.round((voteSummary.abstain / totalVotes) * 100) : 0
 
   const handleSynthesize = async () => {
     setLoading(true)
@@ -387,31 +397,41 @@ function CouncilDeliberationScreen({
 
         {/* Council Member Panels */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <CouncilMemberCard
-            name="GPT"
-            analysis={deliberation.gpt_analysis}
-            modelKey="gpt"
-          />
-          <CouncilMemberCard
-            name="Claude"
-            analysis={deliberation.claude_analysis}
-            modelKey="claude"
-          />
-          <CouncilMemberCard
-            name="Gemini"
-            analysis={deliberation.gemini_analysis}
-            modelKey="gemini"
-          />
-          <CouncilMemberCard
-            name="Grok"
-            analysis={deliberation.grok_analysis}
-            modelKey="grok"
-          />
-          <CouncilMemberCard
-            name="DeepSeek"
-            analysis={deliberation.deepseek_analysis}
-            modelKey="deepseek"
-          />
+          {deliberation?.gpt_analysis && (
+            <CouncilMemberCard
+              name="GPT"
+              analysis={deliberation.gpt_analysis}
+              modelKey="gpt"
+            />
+          )}
+          {deliberation?.claude_analysis && (
+            <CouncilMemberCard
+              name="Claude"
+              analysis={deliberation.claude_analysis}
+              modelKey="claude"
+            />
+          )}
+          {deliberation?.gemini_analysis && (
+            <CouncilMemberCard
+              name="Gemini"
+              analysis={deliberation.gemini_analysis}
+              modelKey="gemini"
+            />
+          )}
+          {deliberation?.grok_analysis && (
+            <CouncilMemberCard
+              name="Grok"
+              analysis={deliberation.grok_analysis}
+              modelKey="grok"
+            />
+          )}
+          {deliberation?.deepseek_analysis && (
+            <CouncilMemberCard
+              name="DeepSeek"
+              analysis={deliberation.deepseek_analysis}
+              modelKey="deepseek"
+            />
+          )}
         </div>
 
         {/* Synthesize Button */}
@@ -455,43 +475,43 @@ function ConsensusReportScreen({
 LLM COUNCIL CONSENSUS REPORT
 Generated: ${new Date().toLocaleString()}
 
-FINAL RECOMMENDATION: ${result.consensus_recommendation.toUpperCase()}
-Confidence Score: ${result.confidence_weighted_score}%
+FINAL RECOMMENDATION: ${result.consensus_recommendation?.toUpperCase() || 'N/A'}
+Confidence Score: ${result.confidence_weighted_score || 0}%
 
 VOTE DISTRIBUTION:
-- Support: ${result.vote_distribution.support} (${result.majority_position.percentage}%)
-- Oppose: ${result.vote_distribution.oppose} (${result.minority_positions[0]?.percentage || 0}%)
-- Abstain: ${result.vote_distribution.abstain}
+- Support: ${result.vote_distribution?.support || 0} (${result.majority_position?.percentage || 0}%)
+- Oppose: ${result.vote_distribution?.oppose || 0} (${result.minority_positions?.[0]?.percentage || 0}%)
+- Abstain: ${result.vote_distribution?.abstain || 0}
 
-MAJORITY POSITION (${result.majority_position.vote}):
-Members: ${result.majority_position.members.join(', ')}
+MAJORITY POSITION (${result.majority_position?.vote || 'N/A'}):
+Members: ${result.majority_position?.members?.join(', ') || 'N/A'}
 
 COUNCIL SUMMARY:
-${result.council_summary}
+${result.council_summary || 'N/A'}
 
 FINAL DECISION:
-${result.final_recommendation.decision}
+${result.final_recommendation?.decision || 'N/A'}
 
 IMPLEMENTATION STEPS:
-${result.final_recommendation.implementation_steps.map((step, i) => `${i + 1}. ${step}`).join('\n')}
+${result.final_recommendation?.implementation_steps?.map((step, i) => `${i + 1}. ${step}`).join('\n') || 'N/A'}
 
 RISK MITIGATION:
-${result.final_recommendation.risk_mitigation.map((risk, i) => `${i + 1}. ${risk}`).join('\n')}
+${result.final_recommendation?.risk_mitigation?.map((risk, i) => `${i + 1}. ${risk}`).join('\n') || 'N/A'}
 
 SUCCESS CRITERIA:
-${result.final_recommendation.success_criteria.map((criteria, i) => `${i + 1}. ${criteria}`).join('\n')}
+${result.final_recommendation?.success_criteria?.map((criteria, i) => `${i + 1}. ${criteria}`).join('\n') || 'N/A'}
 
 ADDITIONAL GUIDANCE:
-${result.final_recommendation.additional_guidance}
+${result.final_recommendation?.additional_guidance || 'N/A'}
 
 ARGUMENTS FOR:
-${result.synthesized_arguments.arguments_for.map((arg, i) => `${i + 1}. ${arg}`).join('\n')}
+${result.synthesized_arguments?.arguments_for?.map((arg, i) => `${i + 1}. ${arg}`).join('\n') || 'N/A'}
 
 ARGUMENTS AGAINST:
-${result.synthesized_arguments.arguments_against.map((arg, i) => `${i + 1}. ${arg}`).join('\n')}
+${result.synthesized_arguments?.arguments_against?.map((arg, i) => `${i + 1}. ${arg}`).join('\n') || 'N/A'}
 
 KEY CONSIDERATIONS:
-${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${con}`).join('\n')}
+${result.synthesized_arguments?.key_considerations?.map((con, i) => `${i + 1}. ${con}`).join('\n') || 'N/A'}
     `.trim()
 
     const blob = new Blob([reportText], { type: 'text/plain' })
@@ -549,7 +569,7 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-gray-900/50 p-4 rounded-lg">
-                <p className="text-gray-300 leading-relaxed">{result.final_recommendation.decision}</p>
+                <p className="text-gray-300 leading-relaxed">{result.final_recommendation?.decision || 'No decision available'}</p>
               </div>
 
               <Separator className="bg-gray-700" />
@@ -558,15 +578,15 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
                 <h3 className="text-lg font-semibold text-white mb-3">Vote Distribution</h3>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-green-400">{result.vote_distribution.support}</div>
+                    <div className="text-3xl font-bold text-green-400">{result.vote_distribution?.support || 0}</div>
                     <div className="text-sm text-gray-400">Support</div>
                   </div>
                   <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-red-400">{result.vote_distribution.oppose}</div>
+                    <div className="text-3xl font-bold text-red-400">{result.vote_distribution?.oppose || 0}</div>
                     <div className="text-sm text-gray-400">Oppose</div>
                   </div>
                   <div className="bg-gray-500/10 border border-gray-500/30 rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-gray-400">{result.vote_distribution.abstain}</div>
+                    <div className="text-3xl font-bold text-gray-400">{result.vote_distribution?.abstain || 0}</div>
                     <div className="text-sm text-gray-400">Abstain</div>
                   </div>
                 </div>
@@ -583,17 +603,19 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-300 leading-relaxed">{result.council_summary}</p>
+              <p className="text-gray-300 leading-relaxed">{result.council_summary || 'No summary available'}</p>
 
-              <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-                <div className="flex items-start gap-2">
-                  <AlertCircle className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-yellow-400 font-semibold mb-1">Additional Guidance</h4>
-                    <p className="text-gray-300 text-sm leading-relaxed">{result.final_recommendation.additional_guidance}</p>
+              {result.final_recommendation?.additional_guidance && (
+                <div className="mt-4 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="text-yellow-400 font-semibold mb-1">Additional Guidance</h4>
+                      <p className="text-gray-300 text-sm leading-relaxed">{result.final_recommendation.additional_guidance}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </CardContent>
           </Card>
 
@@ -608,12 +630,12 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {result.synthesized_arguments.arguments_for.map((arg, idx) => (
+                  {result.synthesized_arguments?.arguments_for?.map((arg, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
                       <ChevronRight className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
                       <span>{arg}</span>
                     </li>
-                  ))}
+                  )) || <li className="text-sm text-gray-500">No arguments available</li>}
                 </ul>
               </CardContent>
             </Card>
@@ -627,12 +649,12 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {result.synthesized_arguments.arguments_against.map((arg, idx) => (
+                  {result.synthesized_arguments?.arguments_against?.map((arg, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
                       <ChevronRight className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
                       <span>{arg}</span>
                     </li>
-                  ))}
+                  )) || <li className="text-sm text-gray-500">No arguments available</li>}
                 </ul>
               </CardContent>
             </Card>
@@ -646,14 +668,14 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
               </CardHeader>
               <CardContent>
                 <ol className="space-y-3">
-                  {result.final_recommendation.implementation_steps.map((step, idx) => (
+                  {result.final_recommendation?.implementation_steps?.map((step, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/50 flex-shrink-0">
                         {idx + 1}
                       </Badge>
                       <span className="text-sm text-gray-300">{step}</span>
                     </li>
-                  ))}
+                  )) || <li className="text-sm text-gray-500">No implementation steps available</li>}
                 </ol>
               </CardContent>
             </Card>
@@ -664,12 +686,12 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  {result.final_recommendation.risk_mitigation.map((risk, idx) => (
+                  {result.final_recommendation?.risk_mitigation?.map((risk, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
                       <AlertCircle className="w-4 h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
                       <span>{risk}</span>
                     </li>
-                  ))}
+                  )) || <li className="text-sm text-gray-500">No risk mitigation available</li>}
                 </ul>
               </CardContent>
             </Card>
@@ -682,12 +704,12 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
             </CardHeader>
             <CardContent>
               <ul className="space-y-2">
-                {result.final_recommendation.success_criteria.map((criteria, idx) => (
+                {result.final_recommendation?.success_criteria?.map((criteria, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
                     <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
                     <span>{criteria}</span>
                   </li>
-                ))}
+                )) || <li className="text-sm text-gray-500">No success criteria available</li>}
               </ul>
             </CardContent>
           </Card>
@@ -699,12 +721,12 @@ ${result.synthesized_arguments.key_considerations.map((con, i) => `${i + 1}. ${c
             </CardHeader>
             <CardContent>
               <ul className="space-y-2">
-                {result.synthesized_arguments.key_considerations.map((consideration, idx) => (
+                {result.synthesized_arguments?.key_considerations?.map((consideration, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
                     <ChevronRight className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                     <span>{consideration}</span>
                   </li>
-                ))}
+                )) || <li className="text-sm text-gray-500">No key considerations available</li>}
               </ul>
             </CardContent>
           </Card>
