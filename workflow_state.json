@@ -1,0 +1,86 @@
+{
+  "workflow_created": true,
+  "agents": {
+    "council_member_gpt": {
+      "agent_id": "69693565a5272eccb326b370",
+      "name": "Council Member - GPT",
+      "type": "sub-agent",
+      "status": "created",
+      "provider": "OpenAI",
+      "model": "gpt-4.1"
+    },
+    "council_member_claude": {
+      "agent_id": "6969357d9ea90559bbf3d63b",
+      "name": "Council Member - Claude",
+      "type": "sub-agent",
+      "status": "created",
+      "provider": "Anthropic",
+      "model": "claude-sonnet-4-5"
+    },
+    "council_member_gemini": {
+      "agent_id": "696935999ea90559bbf3d63c",
+      "name": "Council Member - Gemini",
+      "type": "sub-agent",
+      "status": "created",
+      "provider": "Google",
+      "model": "gemini-2.5-pro"
+    },
+    "council_member_grok": {
+      "agent_id": "696935d69ea90559bbf3d64c",
+      "name": "Council Member - Grok",
+      "type": "sub-agent",
+      "status": "created",
+      "provider": "OpenAI",
+      "model": "gpt-4o",
+      "note": "xAI provider not available - using OpenAI as fallback"
+    },
+    "council_member_deepseek": {
+      "agent_id": "696935fe9ea90559bbf3d64d",
+      "name": "Council Member - DeepSeek",
+      "type": "sub-agent",
+      "status": "created",
+      "provider": "OpenAI",
+      "model": "gpt-4o-mini",
+      "note": "DeepSeek provider not available - using OpenAI as fallback"
+    },
+    "council_orchestrator": {
+      "agent_id": "69693623a5272eccb326b38e",
+      "name": "Council Orchestrator Agent",
+      "type": "manager",
+      "status": "created",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "manages": [
+        "69693565a5272eccb326b370",
+        "6969357d9ea90559bbf3d63b",
+        "696935999ea90559bbf3d63c",
+        "696935d69ea90559bbf3d64c",
+        "696935fe9ea90559bbf3d64d"
+      ]
+    },
+    "consensus_synthesizer": {
+      "agent_id": "6969365fa5272eccb326b39a",
+      "name": "Consensus Synthesizer Agent",
+      "type": "independent",
+      "status": "created",
+      "provider": "Anthropic",
+      "model": "claude-sonnet-4-5"
+    }
+  },
+  "response_schemas_created": [
+    "council_member_gpt_response.json",
+    "council_member_claude_response.json",
+    "council_member_gemini_response.json",
+    "council_member_grok_response.json",
+    "council_member_deepseek_response.json",
+    "council_orchestrator_agent_response.json",
+    "consensus_synthesizer_agent_response.json"
+  ],
+  "workflow_structure": {
+    "total_agents": 7,
+    "manager_agents": 1,
+    "sub_agents": 5,
+    "independent_agents": 1
+  },
+  "creation_timestamp": "2026-01-15T00:00:00Z"
+}

@@ -1,0 +1,77 @@
+{
+  "agent_name": "Council Member - Grok",
+  "agent_id": "696935d69ea90559bbf3d64c",
+  "agent_purpose": "custom",
+  "description": "Council member vote with unconventional reasoning and contrarian perspectives",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "vote": "string",
+      "confidence": "number",
+      "reasoning_chain": [
+        "string"
+      ],
+      "key_arguments": [
+        "string"
+      ],
+      "model_perspective": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string",
+      "model": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "vote": "oppose",
+      "confidence": 75,
+      "reasoning_chain": [
+        "Step 1: Direct problem assessment begins with understanding the market dynamics affected by high inflation.",
+        "Step 2: Unconventional angle considers the volatility of consumer behavior in such economic conditions.",
+        "Step 3: Challenging assumptions by questioning whether a pivot would lead to sustainable growth.",
+        "Step 4: Straight conclusion is to oppose the pivot due to uncertain consumer reactions and possible erosion of brand position."
+      ],
+      "key_arguments": [
+        "Primary direct argument is that B2B typically offers longer-term contracts providing more consistent revenue streams than B2C.",
+        "Contrarian or alternative view is that B2C might offer higher volumes and potentially quicker cash flow, but at increased risk.",
+        "Practical reality check recognizes that during high inflation, consumer spending can be highly unpredictable, making B2C a potentially riskier venture."
+      ],
+      "model_perspective": "xAI reasoning approach emphasizes leveraging predictable revenue sources during uncertain economic conditions, advocating for stability rather than high-risk explorations."
+    },
+    "metadata": {
+      "agent_name": "Council Member - Grok",
+      "timestamp": "2023-11-23T09:16:19Z",
+      "model": "gpt-4o"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-01-15T18:50:25.189679",
+  "test_message_used": "Provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "vote": "oppose",
+      "confidence": 75,
+      "reasoning_chain": [
+        "Step 1: Direct problem assessment begins with understanding the market dynamics affected by high inflation.",
+        "Step 2: Unconventional angle considers the volatility of consumer behavior in such economic conditions.",
+        "Step 3: Challenging assumptions by questioning whether a pivot would lead to sustainable growth.",
+        "Step 4: Straight conclusion is to oppose the pivot due to uncertain consumer reactions and possible erosion of brand position."
+      ],
+      "key_arguments": [
+        "Primary direct argument is that B2B typically offers longer-term contracts providing more consistent revenue streams than B2C.",
+        "Contrarian or alternative view is that B2C might offer higher volumes and potentially quicker cash flow, but at increased risk.",
+        "Practical reality check recognizes that during high inflation, consumer spending can be highly unpredictable, making B2C a potentially riskier venture."
+      ],
+      "model_perspective": "xAI reasoning approach emphasizes leveraging predictable revenue sources during uncertain economic conditions, advocating for stability rather than high-risk explorations."
+    },
+    "metadata": {
+      "agent_name": "Council Member - Grok",
+      "timestamp": "2023-11-23T09:16:19Z",
+      "model": "gpt-4o"
+    }
+  },
+  "test_passed": true
+}

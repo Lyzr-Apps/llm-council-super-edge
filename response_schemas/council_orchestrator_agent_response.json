@@ -1,0 +1,268 @@
+{
+  "agent_name": "Council Orchestrator Agent",
+  "agent_id": "69693623a5272eccb326b38e",
+  "agent_purpose": "manager",
+  "description": "Orchestrates council session and aggregates all member analyses",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "problem_statement": "string",
+      "council_deliberation": {
+        "gpt_analysis": {
+          "vote": "string",
+          "confidence": "number",
+          "reasoning_chain": [
+            "string"
+          ],
+          "key_arguments": [
+            "string"
+          ]
+        },
+        "claude_analysis": {
+          "vote": "string",
+          "confidence": "number",
+          "reasoning_chain": [
+            "string"
+          ],
+          "key_arguments": [
+            "string"
+          ]
+        },
+        "gemini_analysis": {
+          "vote": "string",
+          "confidence": "number",
+          "reasoning_chain": [
+            "string"
+          ],
+          "key_arguments": [
+            "string"
+          ]
+        },
+        "grok_analysis": {
+          "vote": "string",
+          "confidence": "number",
+          "reasoning_chain": [
+            "string"
+          ],
+          "key_arguments": [
+            "string"
+          ]
+        },
+        "deepseek_analysis": {
+          "vote": "string",
+          "confidence": "number",
+          "reasoning_chain": [
+            "string"
+          ],
+          "key_arguments": [
+            "string"
+          ]
+        }
+      },
+      "vote_summary": {
+        "support": "number",
+        "oppose": "number",
+        "abstain": "number"
+      },
+      "next_step": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string",
+      "council_size": "number"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "problem_statement": "Should our startup pivot from B2B to B2C given current market conditions with high inflation and changing consumer behavior?",
+      "council_deliberation": {
+        "gpt_analysis": {
+          "vote": "oppose",
+          "confidence": 80,
+          "reasoning_chain": [
+            "Step 1: Initial analysis of high inflation and changing consumer behavior suggests increased price sensitivity and potential reduction in discretionary spending by consumers.",
+            "Step 2: B2B markets, while also impacted by inflation, tend to have longer purchasing cycles and contractual relationships, offering more predictable revenue streams, especially valuable in volatile economic conditions.",
+            "Step 3: Transitioning to B2C typically requires significant investments in marketing, customer support, distribution infrastructure, and often yields lower average transaction values, enhancing operational risk in uncertain markets.",
+            "Step 4: Given the current macroeconomic climate, pivoting to a riskier, consumer-centric business model may expose the startup to greater financial instability, whereas retaining B2B focus could better sustain and grow the company through existing relationships and more stable demand."
+          ],
+          "key_arguments": [
+            "Primary argument supporting the vote: The B2B model is generally more resilient during economic downturns due to longer-term contracts and less price elasticity.",
+            "Secondary consideration: B2C pivots require significant new investments and carry greater risk, particularly when consumer demand is unpredictable.",
+            "Risk or limitation identified: The recommendation assumes the startup\u2019s current B2B positioning is tenable; if the B2B market is rapidly collapsing, this decision should be revisited."
+          ]
+        },
+        "claude_analysis": {
+          "vote": "abstain",
+          "confidence": 45,
+          "reasoning_chain": [
+            "Step 1: Contextual understanding - The question involves a fundamental business model pivot during economic uncertainty. High inflation typically reduces consumer discretionary spending while B2B relationships may offer more stability through contracts, but this varies significantly by industry, product type, current customer base, and financial runway.",
+            "Step 2: Ethical considerations - A pivot affects multiple stakeholders: existing B2B customers who depend on your service, employees whose roles may change dramatically, investors who backed a specific model, and potential B2C consumers who may be vulnerable during inflationary periods. Each group's welfare must be weighed carefully.",
+            "Step 3: Nuanced trade-offs - B2C offers potential for higher volume and direct consumer relationships, but requires different expertise (marketing, customer service, distribution), capital for consumer acquisition, and exposes you to inflation-driven demand volatility. B2B provides predictable revenue but may limit growth velocity. The 'right' choice depends critically on: your product's nature, team capabilities, capital reserves, competitive positioning, and time horizon.",
+            "Step 4: Balanced conclusion - Without knowing your specific industry vertical, product-market fit evidence in B2C, financial reserves, team composition, and competitive landscape, recommending either direction would be premature. The decision requires deep analysis of factors not provided in the question."
+          ],
+          "key_arguments": [
+            "Insufficient information about critical variables: your specific industry, product type, current traction, financial runway, team capabilities, and competitive positioning make a definitive recommendation impossible without risking harm",
+            "High inflation creates contradictory pressures: B2C spending contracts while B2B budgets may be more protected through existing contracts, but both sectors face challenges that vary by specific market segment",
+            "Pivot decisions carry substantial ethical weight affecting employees, customers, and investors - the stakes demand evidence-based analysis rather than directional guidance based on macro conditions alone"
+          ]
+        },
+        "gemini_analysis": {
+          "vote": "oppose",
+          "confidence": 75,
+          "reasoning_chain": [
+            "Step 1: Factual assessment of the current economic landscape indicates that high inflation is straining consumer purchasing power, potentially leading to reduced spending in the B2C sector.",
+            "Step 2: Evidence evaluation shows that while some businesses have successfully pivoted to B2C during uncertain times, many have faced challenges related to customer acquisition and retention costs.",
+            "Step 3: Data-driven analysis reveals that the B2B sector often offers more stability and larger transaction sizes, which can be more appealing during periods of economic uncertainty compared to B2C where demand can fluctuate significantly.",
+            "Step 4: Grounded conclusion suggests that maintaining a focus on B2B may ensure stronger revenue streams while developing resilience in the current market climate, rather than risking disruption by shifting to B2C."
+          ],
+          "key_arguments": [
+            "B2C markets are under pressure from high inflation, which may lead to decreased consumer spending and increased price sensitivity.",
+            "Transitioning to B2C could incur higher marketing and operational costs without guaranteed customer acquisition success.",
+            "The stability of the B2B sector may provide a safer revenue model during economic downturns."
+          ]
+        },
+        "grok_analysis": {
+          "vote": "oppose",
+          "confidence": 75,
+          "reasoning_chain": [
+            "Step 1: Direct problem assessment shows consumer spending is often constrained in high inflation periods due to reduced disposable income.",
+            "Step 2: Unconventional angle considers the increased emphasis on cost-effectiveness and efficiency, usually more pertinent to B2B markets.",
+            "Step 3: Challenging assumptions reveals that B2C markets might face unpredictable demand shifts, increasing the risk for startups with limited buffers.",
+            "Step 4: Straight conclusion is that maintaining a B2B focus may offer more stability in turbulent financial climates, despite high inflation."
+          ],
+          "key_arguments": [
+            "Primary direct argument: B2B clients lock in predictable revenue streams, which can be critical for startup sustainability.",
+            "Contrarian or alternative view: A B2C pivot could capitalize on niche markets, but this is highly speculative and volatile.",
+            "Practical reality check: Startups often lack the resources to effectively alter strategies on the fly in response to rapid market changes."
+          ]
+        },
+        "deepseek_analysis": {
+          "vote": "support",
+          "confidence": 78,
+          "reasoning_chain": [
+            "Step 1: Deep analytical assessment of current market conditions indicates a shift in consumer behavior due to high inflation, prompting increased price sensitivity and demand for cost-effective solutions.",
+            "Step 2: Structured decomposition of our current B2B model reveals dependencies on client budgets that are tightening due to economic pressures, reducing predictability in sales.",
+            "Step 3: Systematic evaluation of the B2C landscape shows potential for greater engagement with individual consumers who may prioritize value and adaptability, benefiting from a tailored product approach.",
+            "Step 4: Rigorous conclusion drawn from the analysis suggests that pivoting to B2C could stabilize revenue streams during economic uncertainty, capturing new market segments like value-focused consumers."
+          ],
+          "key_arguments": [
+            "Transitioning to a B2C model can mitigate the risks associated with B2B reliance amidst economic downturns.",
+            "Increased consumer interest in direct-to-consumer brands could lead to enhanced brand loyalty and engagement.",
+            "Adapting our offerings to meet B2C needs can potentially unlock new revenue channels and diversify our market footprint."
+          ]
+        }
+      },
+      "vote_summary": {
+        "support": 1,
+        "oppose": 3,
+        "abstain": 1
+      },
+      "next_step": "Deliberation complete - ready for synthesis"
+    },
+    "metadata": {
+      "agent_name": "Council Orchestrator Agent",
+      "timestamp": "2024-06-15T18:32:08Z",
+      "council_size": 5
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-01-15T18:51:31.436548",
+  "test_message_used": "Process this request and coordinate sub-agents",
+  "test_error": "Agent test timed out after 30 seconds",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "problem_statement": "Should our startup pivot from B2B to B2C given current market conditions with high inflation and changing consumer behavior?",
+      "council_deliberation": {
+        "gpt_analysis": {
+          "vote": "oppose",
+          "confidence": 80,
+          "reasoning_chain": [
+            "Step 1: Initial analysis of high inflation and changing consumer behavior suggests increased price sensitivity and potential reduction in discretionary spending by consumers.",
+            "Step 2: B2B markets, while also impacted by inflation, tend to have longer purchasing cycles and contractual relationships, offering more predictable revenue streams, especially valuable in volatile economic conditions.",
+            "Step 3: Transitioning to B2C typically requires significant investments in marketing, customer support, distribution infrastructure, and often yields lower average transaction values, enhancing operational risk in uncertain markets.",
+            "Step 4: Given the current macroeconomic climate, pivoting to a riskier, consumer-centric business model may expose the startup to greater financial instability, whereas retaining B2B focus could better sustain and grow the company through existing relationships and more stable demand."
+          ],
+          "key_arguments": [
+            "Primary argument supporting the vote: The B2B model is generally more resilient during economic downturns due to longer-term contracts and less price elasticity.",
+            "Secondary consideration: B2C pivots require significant new investments and carry greater risk, particularly when consumer demand is unpredictable.",
+            "Risk or limitation identified: The recommendation assumes the startup\u2019s current B2B positioning is tenable; if the B2B market is rapidly collapsing, this decision should be revisited."
+          ]
+        },
+        "claude_analysis": {
+          "vote": "abstain",
+          "confidence": 45,
+          "reasoning_chain": [
+            "Step 1: Contextual understanding - The question involves a fundamental business model pivot during economic uncertainty. High inflation typically reduces consumer discretionary spending while B2B relationships may offer more stability through contracts, but this varies significantly by industry, product type, current customer base, and financial runway.",
+            "Step 2: Ethical considerations - A pivot affects multiple stakeholders: existing B2B customers who depend on your service, employees whose roles may change dramatically, investors who backed a specific model, and potential B2C consumers who may be vulnerable during inflationary periods. Each group's welfare must be weighed carefully.",
+            "Step 3: Nuanced trade-offs - B2C offers potential for higher volume and direct consumer relationships, but requires different expertise (marketing, customer service, distribution), capital for consumer acquisition, and exposes you to inflation-driven demand volatility. B2B provides predictable revenue but may limit growth velocity. The 'right' choice depends critically on: your product's nature, team capabilities, capital reserves, competitive positioning, and time horizon.",
+            "Step 4: Balanced conclusion - Without knowing your specific industry vertical, product-market fit evidence in B2C, financial reserves, team composition, and competitive landscape, recommending either direction would be premature. The decision requires deep analysis of factors not provided in the question."
+          ],
+          "key_arguments": [
+            "Insufficient information about critical variables: your specific industry, product type, current traction, financial runway, team capabilities, and competitive positioning make a definitive recommendation impossible without risking harm",
+            "High inflation creates contradictory pressures: B2C spending contracts while B2B budgets may be more protected through existing contracts, but both sectors face challenges that vary by specific market segment",
+            "Pivot decisions carry substantial ethical weight affecting employees, customers, and investors - the stakes demand evidence-based analysis rather than directional guidance based on macro conditions alone"
+          ]
+        },
+        "gemini_analysis": {
+          "vote": "oppose",
+          "confidence": 75,
+          "reasoning_chain": [
+            "Step 1: Factual assessment of the current economic landscape indicates that high inflation is straining consumer purchasing power, potentially leading to reduced spending in the B2C sector.",
+            "Step 2: Evidence evaluation shows that while some businesses have successfully pivoted to B2C during uncertain times, many have faced challenges related to customer acquisition and retention costs.",
+            "Step 3: Data-driven analysis reveals that the B2B sector often offers more stability and larger transaction sizes, which can be more appealing during periods of economic uncertainty compared to B2C where demand can fluctuate significantly.",
+            "Step 4: Grounded conclusion suggests that maintaining a focus on B2B may ensure stronger revenue streams while developing resilience in the current market climate, rather than risking disruption by shifting to B2C."
+          ],
+          "key_arguments": [
+            "B2C markets are under pressure from high inflation, which may lead to decreased consumer spending and increased price sensitivity.",
+            "Transitioning to B2C could incur higher marketing and operational costs without guaranteed customer acquisition success.",
+            "The stability of the B2B sector may provide a safer revenue model during economic downturns."
+          ]
+        },
+        "grok_analysis": {
+          "vote": "oppose",
+          "confidence": 75,
+          "reasoning_chain": [
+            "Step 1: Direct problem assessment shows consumer spending is often constrained in high inflation periods due to reduced disposable income.",
+            "Step 2: Unconventional angle considers the increased emphasis on cost-effectiveness and efficiency, usually more pertinent to B2B markets.",
+            "Step 3: Challenging assumptions reveals that B2C markets might face unpredictable demand shifts, increasing the risk for startups with limited buffers.",
+            "Step 4: Straight conclusion is that maintaining a B2B focus may offer more stability in turbulent financial climates, despite high inflation."
+          ],
+          "key_arguments": [
+            "Primary direct argument: B2B clients lock in predictable revenue streams, which can be critical for startup sustainability.",
+            "Contrarian or alternative view: A B2C pivot could capitalize on niche markets, but this is highly speculative and volatile.",
+            "Practical reality check: Startups often lack the resources to effectively alter strategies on the fly in response to rapid market changes."
+          ]
+        },
+        "deepseek_analysis": {
+          "vote": "support",
+          "confidence": 78,
+          "reasoning_chain": [
+            "Step 1: Deep analytical assessment of current market conditions indicates a shift in consumer behavior due to high inflation, prompting increased price sensitivity and demand for cost-effective solutions.",
+            "Step 2: Structured decomposition of our current B2B model reveals dependencies on client budgets that are tightening due to economic pressures, reducing predictability in sales.",
+            "Step 3: Systematic evaluation of the B2C landscape shows potential for greater engagement with individual consumers who may prioritize value and adaptability, benefiting from a tailored product approach.",
+            "Step 4: Rigorous conclusion drawn from the analysis suggests that pivoting to B2C could stabilize revenue streams during economic uncertainty, capturing new market segments like value-focused consumers."
+          ],
+          "key_arguments": [
+            "Transitioning to a B2C model can mitigate the risks associated with B2B reliance amidst economic downturns.",
+            "Increased consumer interest in direct-to-consumer brands could lead to enhanced brand loyalty and engagement.",
+            "Adapting our offerings to meet B2C needs can potentially unlock new revenue channels and diversify our market footprint."
+          ]
+        }
+      },
+      "vote_summary": {
+        "support": 1,
+        "oppose": 3,
+        "abstain": 1
+      },
+      "next_step": "Deliberation complete - ready for synthesis"
+    },
+    "metadata": {
+      "agent_name": "Council Orchestrator Agent",
+      "timestamp": "2024-06-15T18:32:08Z",
+      "council_size": 5
+    }
+  },
+  "test_passed": true
+}

@@ -1,0 +1,77 @@
+{
+  "agent_name": "Council Member - DeepSeek",
+  "agent_id": "696935fe9ea90559bbf3d64d",
+  "agent_purpose": "custom",
+  "description": "Council member vote with deep analytical reasoning chains",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "vote": "string",
+      "confidence": "number",
+      "reasoning_chain": [
+        "string"
+      ],
+      "key_arguments": [
+        "string"
+      ],
+      "model_perspective": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string",
+      "model": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "vote": "support",
+      "confidence": 85,
+      "reasoning_chain": [
+        "Step 1: Deep analytical assessment of current market conditions indicates a shift in consumer behavior towards direct purchasing options due to inflationary pressures and budget constraints.",
+        "Step 2: Structured decomposition reveals that B2C offerings may enhance engagement with consumers directly, potentially leading to better customer insights and agility in response to market changes.",
+        "Step 3: Systematic evaluation of competitive landscape shows that several successful companies are pivoting to B2C, capitalizing on direct consumer relationships, which can increase brand loyalty.",
+        "Step 4: Rigorous conclusion suggests that while transitioning to B2C involves risks, the potential for capturing immediate market demand and adapting to consumer trends outweighs the challenges."
+      ],
+      "key_arguments": [
+        "High inflation is motivating consumers to seek more value and direct interactions with brands.",
+        "A B2C model allows for faster feedback loops and better alignment with evolving consumer preferences.",
+        "Diversifying into B2C can open new revenue streams and mitigate dependence on B2B contracts."
+      ],
+      "model_perspective": "DeepSeek reasoning approach emphasizes a data-driven understanding of market dynamics, which supports the transition from B2B to B2C in response to significant economic shifts."
+    },
+    "metadata": {
+      "agent_name": "Council Member - DeepSeek",
+      "timestamp": "2023-10-01T12:00:00Z",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-01-15T18:50:32.617931",
+  "test_message_used": "Provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "vote": "support",
+      "confidence": 85,
+      "reasoning_chain": [
+        "Step 1: Deep analytical assessment of current market conditions indicates a shift in consumer behavior towards direct purchasing options due to inflationary pressures and budget constraints.",
+        "Step 2: Structured decomposition reveals that B2C offerings may enhance engagement with consumers directly, potentially leading to better customer insights and agility in response to market changes.",
+        "Step 3: Systematic evaluation of competitive landscape shows that several successful companies are pivoting to B2C, capitalizing on direct consumer relationships, which can increase brand loyalty.",
+        "Step 4: Rigorous conclusion suggests that while transitioning to B2C involves risks, the potential for capturing immediate market demand and adapting to consumer trends outweighs the challenges."
+      ],
+      "key_arguments": [
+        "High inflation is motivating consumers to seek more value and direct interactions with brands.",
+        "A B2C model allows for faster feedback loops and better alignment with evolving consumer preferences.",
+        "Diversifying into B2C can open new revenue streams and mitigate dependence on B2B contracts."
+      ],
+      "model_perspective": "DeepSeek reasoning approach emphasizes a data-driven understanding of market dynamics, which supports the transition from B2B to B2C in response to significant economic shifts."
+    },
+    "metadata": {
+      "agent_name": "Council Member - DeepSeek",
+      "timestamp": "2023-10-01T12:00:00Z",
+      "model": "gpt-4o-mini"
+    }
+  },
+  "test_passed": true
+}

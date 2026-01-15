@@ -1,0 +1,178 @@
+{
+  "nodes": [
+    {
+      "id": "problem_input",
+      "type": "Input",
+      "label": "Problem Input",
+      "nodeCategory": "input",
+      "position": { "x": 100, "y": 300 },
+      "data": {
+        "description": "User submits problem/decision for council deliberation"
+      }
+    },
+    {
+      "id": "council_orchestrator",
+      "type": "Agent",
+      "label": "Council Orchestrator Agent",
+      "nodeCategory": "agent",
+      "position": { "x": 400, "y": 300 },
+      "data": {
+        "agent_id": "69693623a5272eccb326b38e",
+        "agent_type": "manager",
+        "provider": "OpenAI",
+        "model": "gpt-4.1",
+        "manages_agents": [
+          "69693565a5272eccb326b370",
+          "6969357d9ea90559bbf3d63b",
+          "696935999ea90559bbf3d63c",
+          "696935d69ea90559bbf3d64c",
+          "696935fe9ea90559bbf3d64d"
+        ]
+      }
+    },
+    {
+      "id": "member_gpt",
+      "type": "Agent",
+      "label": "Council Member - GPT",
+      "nodeCategory": "agent",
+      "position": { "x": 700, "y": 100 },
+      "data": {
+        "agent_id": "69693565a5272eccb326b370",
+        "agent_type": "sub-agent",
+        "provider": "OpenAI",
+        "model": "gpt-4.1",
+        "reasoning_style": "Systematic, practical analysis"
+      }
+    },
+    {
+      "id": "member_claude",
+      "type": "Agent",
+      "label": "Council Member - Claude",
+      "nodeCategory": "agent",
+      "position": { "x": 700, "y": 200 },
+      "data": {
+        "agent_id": "6969357d9ea90559bbf3d63b",
+        "agent_type": "sub-agent",
+        "provider": "Anthropic",
+        "model": "claude-sonnet-4-5",
+        "reasoning_style": "Nuanced, ethical considerations"
+      }
+    },
+    {
+      "id": "member_gemini",
+      "type": "Agent",
+      "label": "Council Member - Gemini",
+      "nodeCategory": "agent",
+      "position": { "x": 700, "y": 300 },
+      "data": {
+        "agent_id": "696935999ea90559bbf3d63c",
+        "agent_type": "sub-agent",
+        "provider": "Google",
+        "model": "gemini-2.5-pro",
+        "reasoning_style": "Fact-based, evidence-driven"
+      }
+    },
+    {
+      "id": "member_grok",
+      "type": "Agent",
+      "label": "Council Member - Grok",
+      "nodeCategory": "agent",
+      "position": { "x": 700, "y": 400 },
+      "data": {
+        "agent_id": "696935d69ea90559bbf3d64c",
+        "agent_type": "sub-agent",
+        "provider": "OpenAI",
+        "model": "gpt-4o",
+        "reasoning_style": "Direct, unconventional perspectives",
+        "note": "xAI provider fallback"
+      }
+    },
+    {
+      "id": "member_deepseek",
+      "type": "Agent",
+      "label": "Council Member - DeepSeek",
+      "nodeCategory": "agent",
+      "position": { "x": 700, "y": 500 },
+      "data": {
+        "agent_id": "696935fe9ea90559bbf3d64d",
+        "agent_type": "sub-agent",
+        "provider": "OpenAI",
+        "model": "gpt-4o-mini",
+        "reasoning_style": "Deep analytical reasoning",
+        "note": "DeepSeek provider fallback"
+      }
+    },
+    {
+      "id": "consensus_synthesizer",
+      "type": "Agent",
+      "label": "Consensus Synthesizer Agent",
+      "nodeCategory": "agent",
+      "position": { "x": 1000, "y": 300 },
+      "data": {
+        "agent_id": "6969365fa5272eccb326b39a",
+        "agent_type": "independent",
+        "provider": "Anthropic",
+        "model": "claude-sonnet-4-5",
+        "description": "Synthesizes final consensus report"
+      }
+    },
+    {
+      "id": "consensus_output",
+      "type": "Output",
+      "label": "Consensus Report",
+      "nodeCategory": "end",
+      "position": { "x": 1300, "y": 300 },
+      "data": {
+        "description": "Final consensus report with vote distribution and recommendation"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "problem_input",
+      "target": "council_orchestrator",
+      "label": "Problem submission"
+    },
+    {
+      "source": "council_orchestrator",
+      "target": "member_gpt",
+      "label": "Distribute to GPT"
+    },
+    {
+      "source": "council_orchestrator",
+      "target": "member_claude",
+      "label": "Distribute to Claude"
+    },
+    {
+      "source": "council_orchestrator",
+      "target": "member_gemini",
+      "label": "Distribute to Gemini"
+    },
+    {
+      "source": "council_orchestrator",
+      "target": "member_grok",
+      "label": "Distribute to Grok"
+    },
+    {
+      "source": "council_orchestrator",
+      "target": "member_deepseek",
+      "label": "Distribute to DeepSeek"
+    },
+    {
+      "source": "council_orchestrator",
+      "target": "consensus_synthesizer",
+      "label": "Send deliberation record"
+    },
+    {
+      "source": "consensus_synthesizer",
+      "target": "consensus_output",
+      "label": "Final report"
+    }
+  ],
+  "metadata": {
+    "project_name": "LLM Council Multi-Model Consensus System",
+    "total_agents": 7,
+    "workflow_type": "manager-subagent-independent",
+    "created_at": "2026-01-15T00:00:00Z"
+  }
+}

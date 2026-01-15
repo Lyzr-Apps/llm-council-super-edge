@@ -1,0 +1,77 @@
+{
+  "agent_name": "Council Member - Gemini",
+  "agent_id": "696935999ea90559bbf3d63c",
+  "agent_purpose": "custom",
+  "description": "Council member vote with reasoning chain emphasizing factual grounding",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "vote": "string",
+      "confidence": "number",
+      "reasoning_chain": [
+        "string"
+      ],
+      "key_arguments": [
+        "string"
+      ],
+      "model_perspective": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string",
+      "model": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "vote": "support",
+      "confidence": 85,
+      "reasoning_chain": [
+        "Step 1: Factual assessment of current market conditions indicates a trend towards increased consumer spending in certain sectors despite high inflation.",
+        "Step 2: Evidence evaluation shows that many startups successfully pivoting to B2C are finding opportunities by catering to changing consumer habits and needs.",
+        "Step 3: Data-driven analysis suggests that adopting a B2C approach may diversify revenue streams and reduce dependency on B2B clients, which could stabilize income amidst economic fluctuations.",
+        "Step 4: Grounded conclusion indicates that while risks exist, the potential for growth in B2C markets aligns well with the evolving consumer landscape."
+      ],
+      "key_arguments": [
+        "High inflation is prompting consumers to seek alternatives, indicating potential for B2C opportunities.",
+        "Changing consumer habits towards online shopping and direct purchases can benefit a B2C model.",
+        "There is uncertainty regarding specific market segments, and not all B2C ventures may succeed."
+      ],
+      "model_perspective": "Google multimodal reasoning emphasizes adapting to market dynamics by evaluating both quantitative data and qualitative trends, enabling informed strategic pivots."
+    },
+    "metadata": {
+      "agent_name": "Council Member - Gemini",
+      "timestamp": "2023-10-05T12:00:00Z",
+      "model": "gemini-2.5-pro"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-01-15T18:50:19.248574",
+  "test_message_used": "Provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "vote": "support",
+      "confidence": 85,
+      "reasoning_chain": [
+        "Step 1: Factual assessment of current market conditions indicates a trend towards increased consumer spending in certain sectors despite high inflation.",
+        "Step 2: Evidence evaluation shows that many startups successfully pivoting to B2C are finding opportunities by catering to changing consumer habits and needs.",
+        "Step 3: Data-driven analysis suggests that adopting a B2C approach may diversify revenue streams and reduce dependency on B2B clients, which could stabilize income amidst economic fluctuations.",
+        "Step 4: Grounded conclusion indicates that while risks exist, the potential for growth in B2C markets aligns well with the evolving consumer landscape."
+      ],
+      "key_arguments": [
+        "High inflation is prompting consumers to seek alternatives, indicating potential for B2C opportunities.",
+        "Changing consumer habits towards online shopping and direct purchases can benefit a B2C model.",
+        "There is uncertainty regarding specific market segments, and not all B2C ventures may succeed."
+      ],
+      "model_perspective": "Google multimodal reasoning emphasizes adapting to market dynamics by evaluating both quantitative data and qualitative trends, enabling informed strategic pivots."
+    },
+    "metadata": {
+      "agent_name": "Council Member - Gemini",
+      "timestamp": "2023-10-05T12:00:00Z",
+      "model": "gemini-2.5-pro"
+    }
+  },
+  "test_passed": true
+}
